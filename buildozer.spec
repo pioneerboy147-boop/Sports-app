@@ -19,8 +19,8 @@ source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
 # (list) Application requirements
-# comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy
+# Pin python3 to 3.11 to prevent unstable python 3.14 build crashes
+requirements = python3==3.11.0,kivy
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
@@ -44,7 +44,6 @@ android.ndk = 25b
 android.accept_sdk_license = True
 
 # (str) The Android arch to build for
-# Only arm64-v8a to avoid NDK/C++ build failures on 64-bit devices
 android.archs = arm64-v8a
 
 # (bool) Enable AndroidX support
