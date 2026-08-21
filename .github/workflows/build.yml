@@ -1,5 +1,4 @@
 
-          
 name: Build Android APK
 
 on:
@@ -14,24 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Build with Buildozer
+        uses: Francesca-P/buildozer-action@v1
         with:
-          python-version: '3.10'
+          command: buildozer -v android debug
+          submodule_dependencies: false
 
-      - name: Install dependencies
-        env:
-          DEBIAN_FRONTEND: noninteractive
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
-          python -m pip install --upgrade pip setuptools buildozer Cython kivy
-
-      - name: Build APK with Buildozer
-        run: |
-          yes | buildozer -v android debug
-
-      - name: Upload APK Artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: sports-app-apk
